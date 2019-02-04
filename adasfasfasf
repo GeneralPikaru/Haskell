@@ -1,0 +1,172 @@
+NAME* -> constant value could also be assigned on declaration
+NAME** -> constant value is assigned on declaration
+NAME# -> irrelevant lookup; specifically for primitives who are initially assigned their default value
+NAME^0, NAME^1, NAME^2, NAME^3, ... -> see addendum
+---------------------------------
+
+addendum
+^0 -> not WAI.
+^1 -> might want to build a (complete) string constructor for XML-files.
+^2 -> status messages and error messages might want to be put into an enum.
+^3 -> names of enums can be made a string with an inherent method of the enum class.
+      the exact version to be checked for should be stored with the world itself;
+      might even be worth to implement a method to check for all the version stuff.
+^4 -> in the setup method for a new Game (initNewGame()), many raw values exist,
+      that have nothing to do with setting up a new game and everything to do with the
+      npcs themself. I highly suggest to move them elsewhere
+^5 -> Since these values are inherent to the Weather itself, they should at least
+      be put into Weather.java 
+      
+---------------------------------
+Game.java (com.lt.game.Game)
+VarCons FONT_SIZE_MINIMUM 				(12) 		171
+VarCons FONT_SIZE_NORMAL 				(18) 		172
+VarCons FONT_SIZE_LARGE 				(24) 		173
+VarCons FONT_SIZE_HUGE 					(36) 		174
+VarCons TIME_SKIP_YEARS 				(3)		176;282,284
+ExpCons MINUTES_PASSED_INIT*				(1200)[20 h]	237
+ExpCons IN_COMBAT_INIT#					(false)		238
+ExpCons IN_SEX_INIT#					(false)		239
+ExpCons RENDER_ATTRIBUTES_SECTION_INIT#			(false)		240
+ExpCons RENDER_MAP_INIT#				(false)		241
+ExpCons IMPERIAL_MEASUREMENTS_INIT#			(false)		242
+ExpCons STARTED_INIT#					(false)		246
+ExpCons PROLOGUE_FINISHED_INIT*				(true) 		247
+ExpCons CURRENT_WEATHER_INIT*				(
+	= Weather.CLOUD;
+							)		252
+ExpCons WEATHER_TIME_REMAINING_INIT*			(300)[5 h]	253
+ExpCons NEXT_STORM_TIME_BASE_INIT			(2880)[2 d]	254
+ExpCons NEXT_STORM_TIME_VARIABILITY_INIT^0		(0-1380)[0-23 h]254
+ExpCons TIME_LOG_INIT#					(false)		259
+ExpCons TIME_START_INIT#				(0)		260
+ExpCons STANDARD_XML_INDENT_CHOICE			("yes")		301;520
+ExpCons INDENT_AMOUNT_XML_TAG_MOD			(
+	= "{http://xml.apache.org/xslt}indent-amount";
+							)		302;521
+ExpCons STANDARD_XML_INDENT_AMOUNT			("2")		302;521
+ExpCons DATA_DIRECTORY					("data/")	305;368
+ExpCons CHARACTER_DIRECTORY				(
+	= (DATA_DIRECTORY + "characters/")
+							)		308;317,319,336,371
+ExpCons SAVE_NUMBER_INIT#				(0)		311
+ExpCons XML_TAG^1					(".xml")	312;313,314,317,319,336,376,379,524,...
+ExpCons NANO_TIME_FACTOR				(
+	= (1 / 1000000000f)
+							) 		326;544,1079(inc)
+ExpCons EXPORTED_CHARACTER_XML_TAG			(
+	= "exportedCharacter";
+							)		347
+ExpCons PLAYER_CHARACTER_XML_TAG			(
+	= "playerCharacter";
+							)		349;486,714
+ExpCons OVERWRITE_INIT#					(false)		374
+ExpCons ERROR_MSGS^2					()		381;423,435,448,466,480,490,502,...
+ExpCons GAME_XML_TAG					(
+	= "game";
+							)		406;571,1159
+ExpCons COREINFO_XML_TAG				(
+	= "coreInfo";
+							)		410;573
+ExpCons VERSION_XML_TAG					(
+	= "version";
+							)		412;575
+ExpCons MINUTES_PASSED_XML_TAG				(
+	= "minutesPassed";
+							)		413;577
+ExpCons IMPERIAL_MEASUREMENT_XML_TAG			(
+	= "imperialMeasurements";
+							)		414;578
+ExpCons WEATHER_XML_TAG					(
+	= "weather";
+							)		415;579
+ExpCons NEXT_STORM_TIME_XML_TAG				(
+	= "nextStormTime";
+							)		416;580
+ExpCons GATHERING_STORM_DURATION_XML_TAG		(
+	= "gatheringStormDuration";
+							)		417;582
+ExpCons WEATHER_TIME_REMAINING_XML_TAG			(
+	= "weatherTimeRemaining";
+							)		418;585
+ExpCons DATE_XML_TAG					(
+	= "date";
+							)		427;596
+ExpCons YEAR_XML_TAG					(
+	= "year";
+							)		429;598
+ExpCons MONTH_XML_TAG					(
+	= "month";
+							)		430;599
+ExpCons DAYOFMONTH_XML_TAG				(
+	= "dayOfMonth";
+							)		431;600
+ExpCons HOUR_XML_TAG					(
+	= "hour";
+							)		432;601
+ExpCons MINUTE_XML_TAG					(
+	= "minute";
+							)		433;602
+ExpCons EVENTLOG_XML_TAG				(
+	= "eventLog";
+							)		442;606
+ExpCons SLAVERY_EVENTLOG_XML_TAG			(
+	= "slaveryEventLog";
+							)		453;614
+ExpCons SLAVERY_EVENTLOG_DAY_AMOUNT			(28)		455
+ExpCons MAPS_XML_TAG					(
+	= "maps";
+							)		472;636
+ExpCons NPC_XML_TAG					(
+	= "NPC";
+							)		497;721
+ExpCons STANDARD_XML_DECL_OMIT_CHOICE			("yes")		512
+ExpCons SAVES_DIRECTORY					(
+	= DATA_DIRECTORY + "saves/";
+							)		524;555,1103
+ExpCons STATUS_MSGS^2					()		532;535
+ExpCons DEBUG_INIT#					(false)		551
+ExpCons SLAVERY_XML_TAG					(
+	= "slavery";
+							)		588;(OccupancyUtil:80)
+ExpCons	DIALOGUE_FLAGS_XML_TAG				(
+	= "dialogueFlags";
+							)		604;(DialogueFlags:74)
+ExpCons EVENTLOG_ENTRY_XML_TAG				(
+	= "eventLogEntry";
+							)		606;623
+ExpCons WORLD_XML_TAG					(
+	= "world";
+							)		636;(World:40)
+ExpCons WORLD_TYPE_XML_TAG				(
+	= "worldType";
+							)		639;(World:43)
+EnmCons WORLD_TYPE_XML_TAG_NAMES^3			()		640-653
+EnmCons WORLD_TYPE_EXPIRATION_VERSION^3			()		640-653
+ExpCons LILAYA_AFFECTION_LYSSIETH			(-60)		908;1334
+ExpCons LILAYA_AFFECTION_DARKSIREN			(15)		909;1335
+ExpCons DARKSIREN_AFFECTION_LYSSIETH			(-25)		912;1338
+ExpCons DARKSIREN_AFFECTION_LILAYA			(35)		913;1339
+ExpCons LYSSIETH_AFFECTION_LILAYA			(100)		921;1345
+ExpCons LYSSIETH_AFFECTION_DARKSIREN			(50)		922;1346
+ExpCons LYSSIETH_AFFECTION_ELIZABETH			(75)		923;1347
+ExpCons GENERAL_AFFECTION_OBEDIENCE_VALUES^4		(...)		1191-...
+ExpCons IS-IN_NPC_UPDATE_LOOP_INIT#			(false)		1370
+ExpCons PENDING_SLAVES_IN_STOCK_RESET_INIT**		(true)		1371
+ExpCons WEATHER_CLOUD_DURATION_BASE^5			(120)[2 h]	1727;1769
+ExpCons WEATHER_CLOUD_DURATION_VARIABILITY^5		(0-119)[0-2 h]	1727;1769
+ExpCons WEATHER_RAINSNOW_PROCCHANCE^5			(0.40)		1736
+ExpCons WEATHER_RAINSNOW_DURATION_BASE^5		(60)[1 h]	1742
+ExpCons WEATHER_RAINSNOW_DURATION_VARIABILITY^5		(0-299)[0-5 h]	1742
+ExpCons WEATHER_CLEAR_DURATION_BASE^5			(240)[4 h]	1745;1754
+ExpCons WEATHER_CLEAR_DURATION_VARIABILITY^5		(0-239)[0-4 h]	1745;1754
+ExpCons WEATHER_MAGICSTORM_COOLDOWN_BASE^5		(2880)[2 d]	1751
+ExpCons WEATHER_MAGICSTORM_COOLDOWN_VARIABILITY^5	(0-1380)[0-23 h]1751
+ExpCons WEATHER_MAGICSTORMGATHER_DURATION_BASE^5	(240)[4 h]	1752
+ExpCons WEATHER_MAGICSTORMGATHER_DURATION_VARIABILITY^5	(0-119)[0-2 h]	1752
+ExpCons WEATHER_MAGICSTORM_DURATION_BASE^5		(480)[8 h]	1760
+ExpCons WEATHER_MAGICSTORM_DURATION_VARIABILITY^5	(0-239)[0-4 h]	1760
+ExpCons POSITION_ANCHOR_INIT#				(0)		1797
+ExpCons DIALOGUE_TITLE_INIT**				("")		1798
+ExpCons CORRUPTION_GAINS_INIT**				("")		1805
+ExpCons RESET_POINTER_INIT**				(true)		1921
